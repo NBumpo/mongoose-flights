@@ -4,14 +4,15 @@ module.exports = {
     new: newFlight,
    index,
    create,
-   show
-   
+   show,
+   addDestination
 }
 
 async function show(req, res) {
   try {
-    const flightDocuments = await FlightModel.findById(req.params.id)
-    res.render('flights/show', {flight: flightDocuments})
+    const flightDocument = await FlightModel.findById(req.params.id)
+    console.log(flightDocument)
+    res.render('flights/show', {flight: flightDocument})
   }
 
   catch {
@@ -72,5 +73,17 @@ async function create(req, res, next) {
     }
   }
 
-  
+  async function addDestination(req, res) {
+    try {
+      // req.params)
+      const flight = await FlightModel.findById(req.params.flightId)
+      console.log('flightconsolelog', flight)
+      console.log(req.body)
+      flight.destinations.push(req.body)
+      await flight.save()
+      res.redirect(`/flights/${flight._id}`)
+    } catch {
+
+    }
+  }
  

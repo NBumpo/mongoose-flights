@@ -28,9 +28,9 @@ const flightSchema = new mongoose.Schema({
         type: Date,
         default: yearFromToday,
     },
-    destinations:{
-        type:[destinationSchema]	
-    }
+    
+    destinations: [destinationSchema]	
+    
     
 })
 
